@@ -4,24 +4,27 @@ class Pilha:
 		
 		self._pilhaInterna = []	
 		self._tamanho = tamanho
-		self._indicePilhaInterna = -1			#variavel para referencia da ultima posicao inserida
+		self._indicePilhaInterna = 0			#variavel para referencia da ultima posicao inserida
 		
 	#push
 	def inserir(self, objeto):
 		
-		if(len(self._pilhaInterna) >= 10):
-			print('Impossivel inserir: pilha esta cheia')
-			return
+		if(len(self._indicePilhaInterna) >= self._tamanho):
+			raise ValueError('A pilha está cheia')
 			
 		self._pilhaInterna.append(objeto)
 		self._indicePilhaInterna += 1
 		return
 		
 	#pop
-	def pegarValor(self):
-	
-		valor = self._pilhaInterna[self._indicePilhaInterna]
-		del self._pilhaInterna[self._indicePilhaInterna]
+	def pegarValor(self):	
+		
+		if(self._indicePilhaInterna == 0):
+			raise ValueError('A pilha está vazia')
+		
+		posicaoUltimoValorInserido = self._indicePilhaInterna - 1
+		valor = self._pilhaInterna[posicaoUltimoValorInserido]
+		del self._pilhaInterna[posicaoUltimoValorInserido]
 		self._indicePilhaInterna -= 1
 		return valor
 	
@@ -36,7 +39,7 @@ class Pilha:
 pilha = Pilha(10)
 pilha.inserir(20)
 pilha.inserir('String')
-pilha.inserir('Mierdas')
+pilha.inserir('OutraString')
 pilha.inserir(['Neil', 'Jack', 'Me'])
 pilha.inserir(object())
 pilha.imprimirPilha()
