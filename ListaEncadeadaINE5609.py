@@ -77,17 +77,16 @@ class ListaEncadeadaINE5609:
 	def inserirAntesDe(self, elementoASerInserido, elementoDeReferencia):
 
 		posicaoDeInsercao = self.listaElementos.index(elementoDeReferencia)-1
-
-		#if(posicao)
-
-		self.listaElementos[posicaoDeInsercao] = elementoASerInserido
+		self.listaElementos[self.proximaPosicaoVaga] = elementoASerInserido
+		self.listaPosicoes[posicaoDeInsercao] = self.proximaPosicaoVaga
+		#self.listaPosicoes[posicaoDeInsercao+1] = self.listaElementos.index(elementoDeReferencia)
 
 	#fim da funcao
 
 	def inserirDepoisDe(self, elementoASerInserido, elementoDeReferencia):
 
 		posicaoDeInsercao = self.listaElementos.index(elementoDeReferencia)+1
-		self.listaElementos[posicaoDeInsercao] = elementoASerInserido
+		self.listaPosicoes[self.proximaPosicaoVaga] = posicaoDeInsercao
 
 
 
@@ -95,10 +94,9 @@ le = ListaEncadeadaINE5609(5)
 
 try:
 	le.inserirNoFim('Neal')
-	le.inserirNoFim('Jack')
-	le.inserirNoFim('Me')
-	le.inserirNoFim('King')
-	le.inserirNoComeco('Lovers')
+	le.inserirNoFim('Jack')	
+	le.inserirNoFim('Absent')
+	le.inserirNoFim('Lovers')
 	
 
 except ListaCheiaException as e:
@@ -109,7 +107,7 @@ except ListaCheiaException as e:
 print(le.listaElementos)
 print(le.listaPosicoes)
 
-le.inserirAntesDe('Absent', 'Lovers')
+le.inserirAntesDe('Me', 'Absent')
 
 print(le.listaElementos)
 print(le.listaPosicoes)
