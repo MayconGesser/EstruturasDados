@@ -1,2 +1,2 @@
-# EstruturasDadosPython
-Objetos/abstrações de estruturas de dados básicas em Python
+# EstruturasDados
+Objetos/abstrações de estruturas de dados básicas
