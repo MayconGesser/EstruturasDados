@@ -22,32 +22,33 @@ int getascii(char c)		//essa funcao retorna o codigo ascii associado a um char
 	return ascii;
 }
 
-char convAsciiMaiuscula(char c)	//essa funcao pega o codigo ascii associado a cada char,
-{								//e subtrai 32, pois eh possivel obter qualquer letra maiuscula
-	if(c == ' ')				//subtraindo 32 do codigo ascii da minuscula (vide tabela ascii)
-	{							//ela em seguida converte novamente o codigo ascii em um caractere
-		return ' ';				//e testa para saber se eh um valor aceitavel para ser retornado
-	}
+char convAsciiMaiuscula(char c)	//essa funcao testa o caractere de argumento para saber se eh um caractere minusculo
+{								//se nao for, retorna o proprio caractere de argumento, pois essa funcao soh
+								//almeja modificar caracteres minusculos
 
-	char asciiMaiuscula;
-	char retornosAceitaveis[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-	'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'W', 'Z', '\0'};
-	int tamanho = getlength(retornosAceitaveis);
-	int ascii = getascii(c);
-	ascii = ascii - 32;
-	asciiMaiuscula = (char) ascii;
-	bool ehRetornoAceitavel = false;
+	char entradas_aceitaveis[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
+									'p','q','r','s','t','u','v','x','y','w','z','\0'};
 
-	for(int i = 0; i<tamanho; i++)
+	int iteracoes = getlength(entradas_aceitaveis);
+	bool eh_aceitavel = false;
+
+	for(int i = 0; i<iteracoes; i++)
 	{
-		if(retornosAceitaveis[i] == asciiMaiuscula)
+		if(c == entradas_aceitaveis[i])
 		{
-			ehRetornoAceitavel = true;
+			eh_aceitavel = true;
 		}
 	}
 
-	char retorno = ehRetornoAceitavel ? asciiMaiuscula : '.';
+	char retorno;
+	retorno = eh_aceitavel ? (char)(getascii(c)-32) : c;		
 	return retorno;
+
+
+	//essa eh uma verificacao com operador ternario
+	//se o argumento de entrada for aceitavel, a funcao subtrai 32 do codigo ascii associado ao caractere
+	//na tabela ascii, eh possivel obter a letra maiuscula de uma minuscula subtraindo 32 de seu codigo
+	//o operador ternario faz o cast de volta para para char a partir dessa subtracao															
 }
 
 int converterMaiusculas(char* arr)	//essa funcao basicamente aceita uma string como entrada e aplica a funcao
@@ -81,6 +82,6 @@ int main()
     char string[tam];					
     scanf("%[^\n]", string);
     converterMaiusculas(string);
- 	imprimeArrayChar(string);   
+ 	imprimeArrayChar(string);
     return 0;
 }
