@@ -1,8 +1,5 @@
-class No:
-	def __init__(self,valor,proximo=None):
-		self.valor = valor
-		self.proximo = proximo
-		self.topo = None
+
+from No import No
 
 class Pilha:
 	
